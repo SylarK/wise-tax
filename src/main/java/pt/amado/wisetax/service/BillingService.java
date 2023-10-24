@@ -1,12 +1,20 @@
 package pt.amado.wisetax.service;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import pt.amado.wisetax.model.enitities.BillingAccount;
+import pt.amado.wisetax.model.enitities.ChargingRequest;
+import pt.amado.wisetax.repository.BillingAccountRepository;
 
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
+@Service
+@RequiredArgsConstructor
 public class BillingService {
+
+    private final BillingAccountRepository billingAccountRepository;
 
     public BillingAccount processServiceARequest(BillingAccount account, ServiceARequest request) {
         try {
@@ -103,4 +111,13 @@ public class BillingService {
         return dayOfWeek >= 6 && dayOfWeek <= 7; // Weekends are Saturday and Sunday
     }
 
+    public BillingAccount getBillingAccountByPhoneNumber(String phoneNumber) {
+        return billingAccountRepository.findByPhoneNumber(phoneNumber);
+    }
+
+    public BillingAccount saveNewAccount(ChargingRequest request) {
+        BillingAccount billingAccount = new BillingAccount();
+        billingAccount.setPhoneNumber(request.getPhoneNumber());
+        return billingAccountRepository.save(billingAccount);
+    }
 }

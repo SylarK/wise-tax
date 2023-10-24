@@ -7,7 +7,7 @@ public class Alpha1Processor implements ServiceAProcessor {
 
     @Override
     public void processRequest(BillingAccount account, Object temp) {
-        
+
     }
 
 }
