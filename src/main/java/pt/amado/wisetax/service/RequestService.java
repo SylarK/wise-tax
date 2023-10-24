@@ -16,11 +16,8 @@ public class RequestService {
     private final ChargingRequestRepository chargingRequestRepository;
     private final ObjectMapper mapper;
 
-    public ChargingRequest saving(ChargingRequestDTO chargingRequestDTO){
+    public ChargingRequest processRequest(ChargingRequestDTO chargingRequestDTO){
         return chargingRequestRepository.save(mapper.convertValue(chargingRequestDTO, ChargingRequest.class));
     }
 
-    public List<ChargingRequest> listAll() {
-        return chargingRequestRepository.findAll();
-    }
 }

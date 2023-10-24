@@ -23,12 +23,8 @@ public class RequestController {
 
     @PostMapping
     ResponseEntity<ChargingRequest> processRequest(@RequestBody @Validated ChargingRequestDTO dto) {
-        return ResponseEntity.ok(requestService.saving(dto));
+        return ResponseEntity.ok(requestService.processRequest(dto));
     }
 
-    @GetMapping
-    ResponseEntity<List<ChargingRequest>> listAll() {
-        return ResponseEntity.ok(requestService.listAll());
-    }
 
 }
