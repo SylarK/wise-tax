@@ -15,9 +15,8 @@ public class ChargingRequest {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @JoinColumn(nullable = false)
-    @ManyToOne
-    private MSISDN phoneNumber;
+    @Column(nullable = false)
+    private String phoneNumber;
 
     @Column(nullable = false)
     private Instant createdAt;
