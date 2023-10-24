@@ -14,7 +14,7 @@ public class ChargingRequestDTO {
     private boolean roaming;
 
     @Pattern(regexp = "\\+?[1-9]\\d{1,14}", message = "Invalid MSISDN format")
-    private String msisdn;
+    private String phoneNumber;
 
     @Positive(message = "RSU must be a positive number")
     private int rsu;

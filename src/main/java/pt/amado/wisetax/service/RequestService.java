@@ -16,11 +16,11 @@ public class RequestService {
     private final ChargingRequestRepository chargingRequestRepository;
     private final ObjectMapper mapper;
 
-    ChargingRequest saving(ChargingRequestDTO chargingRequestDTO){
+    public ChargingRequest saving(ChargingRequestDTO chargingRequestDTO){
         return chargingRequestRepository.saveAndFlush(mapper.convertValue(chargingRequestDTO, ChargingRequest.class));
     }
 
-    List<ChargingRequest> listAll() {
+    public List<ChargingRequest> listAll() {
         return chargingRequestRepository.findAll();
     }
 }

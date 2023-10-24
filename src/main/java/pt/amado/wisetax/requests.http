@@ -1,9 +1,13 @@
+### Persist request
 POST localhost:8080/api/v1
 Content-Type: application/json
 
 {
   "service": "A",
   "roaming": true,
-  "msisdn": "+1234567890",
+  "phoneNumber": "+1234567890",
   "rsu": 100
 }
+
+### Find All Requests
+GET localhost:8080/api/v1
