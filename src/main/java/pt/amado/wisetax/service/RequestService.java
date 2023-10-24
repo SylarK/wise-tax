@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pt.amado.wisetax.dto.ChargingRequestDTO;
-import pt.amado.wisetax.model.ChargingRequest;
+import pt.amado.wisetax.model.enitities.ChargingRequest;
 import pt.amado.wisetax.repository.ChargingRequestRepository;
 
 import java.util.List;

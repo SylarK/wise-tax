@@ -1,8 +1,9 @@
-package pt.amado.wisetax.model;
+package pt.amado.wisetax.model.enitities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import pt.amado.wisetax.model.ChargingResult;
 
 import java.util.UUID;
 
