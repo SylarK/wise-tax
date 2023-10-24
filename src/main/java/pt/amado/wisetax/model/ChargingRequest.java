@@ -1,7 +1,10 @@
 package pt.amado.wisetax.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SourceType;
 import pt.amado.wisetax.model.enums.Service;
 
 import java.time.Instant;
@@ -9,6 +12,7 @@ import java.util.UUID;
 
 @Entity
 @Setter
+@Getter
 public class ChargingRequest {
 
     @Id
@@ -18,7 +22,7 @@ public class ChargingRequest {
     @Column(nullable = false)
     private String phoneNumber;
 
-    @Column(nullable = false)
+    @CreationTimestamp(source = SourceType.DB)
     private Instant createdAt;
 
     @Column(nullable = false)
