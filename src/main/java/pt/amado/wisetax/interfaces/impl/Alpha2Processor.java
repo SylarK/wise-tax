@@ -12,17 +12,21 @@ import static pt.amado.wisetax.utils.DateUtils.isNightTime;
 @Component
 public class Alpha2Processor implements ServiceProcessor {
 
+    private static final double COST_DAY = 0.5;
+    private static final double COST_NIGHT = 0.25;
+    private static final double DISCOUNT_MIN_BALANCE_BUCKET_2 = 15;
+    private static final double DISCOUNT_BUCKET_2 = 0.05;
+
     @Override
     public void processRequest(BillingAccount account, ChargingRequest request) {
-        double costPerMinute = 0.5;
-        if (isNightTime(request.getCreatedAt())) {
-            costPerMinute = 0.25;
+        double costPerMinute = isNightTime(request.getCreatedAt()) ? COST_NIGHT : COST_DAY;
+
+        if (account.getBucket2() >= DISCOUNT_MIN_BALANCE_BUCKET_2) {
+            costPerMinute -= DISCOUNT_BUCKET_2;
         }
-        if (account.getBucket2() >= 15) {
-            costPerMinute -= 0.05;
-        }
+
         double callCost = costPerMinute * request.getRsu();
-        account.setBucket3(account.getBucket2() + (long) (callCost * 100));
+        account.setBucket3(account.getBucket3() + (long) (callCost * 100));
     }
 
     @Override

@@ -1,7 +1,6 @@
 package pt.amado.wisetax.interfaces.impl;
 
 import org.springframework.stereotype.Component;
-import pt.amado.wisetax.exception.RequestNotEligibleException;
 import pt.amado.wisetax.interfaces.ServiceProcessor;
 import pt.amado.wisetax.model.enitities.BillingAccount;
 import pt.amado.wisetax.model.enitities.ChargingRequest;

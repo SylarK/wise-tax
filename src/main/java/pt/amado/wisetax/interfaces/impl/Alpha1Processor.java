@@ -12,19 +12,28 @@ import static pt.amado.wisetax.utils.DateUtils.isWeekday;
 @Component
 public class Alpha1Processor implements ServiceProcessor {
 
+    private static final double COST_LOCAL = 1.0;
+    private static final double COST_ROAMING = 2.0;
+    private static final int MAX_CALLS = 10;
+    private static final double BONUS = 0.25;
+    private static final double DISCOUNT_MIN_BALANCE_BUCKET_3 = 50;
+    private static final double DISCOUNT_MIN_BALANCE_BUCKET_2 = 5;
+    private static final long DISCOUNT_BUCKET_2 = 5;
+
     @Override
     public void processRequest(BillingAccount account, ChargingRequest request) {
-        double costPerMinute = 1.0;
-        if (request.isRoaming()) {
-            costPerMinute = 2.0;
-            if (account.getCounterA() > 10 && account.getBucket3() > 50) {
-                costPerMinute -= 0.25;
-            }
+        double costPerMinute = request.isRoaming() ? COST_ROAMING : COST_LOCAL;
+
+        if (request.isRoaming() && account.getCounterA() > MAX_CALLS && account.getBucket3() > DISCOUNT_MIN_BALANCE_BUCKET_3) {
+            costPerMinute -= BONUS;
         }
+
         double callCost = costPerMinute * request.getRsu();
-        if (request.isRoaming() && account.getBucket2() >= 5) {
-            account.setBucket2(account.getBucket2() - 5);
+
+        if (request.isRoaming() && account.getBucket2() >= DISCOUNT_MIN_BALANCE_BUCKET_2) {
+            account.setBucket2(account.getBucket2() - DISCOUNT_BUCKET_2);
         }
+
         if (request.isRoaming()) {
             account.setBucket3(account.getBucket3() + (long) (callCost * 100));
         } else {
