@@ -24,6 +24,7 @@ public class BillingService {
 
     private final BillingAccountRepository billingAccountRepository;
     private final EligibilityService eligibilityService;
+    private final ClientDataRecordService clientDataRecordService;
     private final List<ServiceProcessor> serviceProcessors;
     private Map<Tariff, ServiceProcessor> tariffProcessorMap;
 
@@ -47,6 +48,7 @@ public class BillingService {
 
         processor.processRequest(account, request);
         updateCounters(account, request, tariff);
+        clientDataRecordService.saveTransaction(account, request, tariff);
 
         return updateBillingAccount(account);
     }
