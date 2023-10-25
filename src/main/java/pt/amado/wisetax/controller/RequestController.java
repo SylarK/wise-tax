@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pt.amado.wisetax.dto.ChargingRequestDTO;
+import pt.amado.wisetax.exception.GlobalException;
+import pt.amado.wisetax.exception.RequestNotEligibleException;
 import pt.amado.wisetax.model.enitities.BillingAccount;
 import pt.amado.wisetax.model.enitities.ChargingRequest;
 import pt.amado.wisetax.service.RequestService;
@@ -23,7 +25,7 @@ public class RequestController {
     private final RequestService requestService;
 
     @PostMapping
-    ResponseEntity<BillingAccount> processRequest(@RequestBody @Validated ChargingRequestDTO dto) {
+    ResponseEntity<BillingAccount> processRequest(@RequestBody @Validated ChargingRequestDTO dto) throws GlobalException {
         return ResponseEntity.ok(requestService.processRequest(dto));
     }
 

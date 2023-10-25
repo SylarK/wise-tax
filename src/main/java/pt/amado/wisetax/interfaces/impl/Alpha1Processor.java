@@ -1,7 +1,8 @@
 package pt.amado.wisetax.interfaces.impl;
 
 import org.springframework.stereotype.Component;
-import pt.amado.wisetax.interfaces.ServiceAProcessor;
+import pt.amado.wisetax.exception.RequestNotEligibleException;
+import pt.amado.wisetax.interfaces.ServiceProcessor;
 import pt.amado.wisetax.model.enitities.BillingAccount;
 import pt.amado.wisetax.model.enitities.ChargingRequest;
 import pt.amado.wisetax.model.enums.Tariff;
@@ -9,10 +10,10 @@ import pt.amado.wisetax.model.enums.Tariff;
 import static pt.amado.wisetax.utils.DateUtils.isWeekday;
 
 @Component
-public class Alpha1Processor implements ServiceAProcessor {
+public class Alpha1Processor implements ServiceProcessor {
 
     @Override
-    public void processRequest(BillingAccount account, ChargingRequest request) {
+    public void processRequest(BillingAccount account, ChargingRequest request) throws RequestNotEligibleException {
         if (isWeekday(request.getCreatedAt()) && account.getCounterA() < 100) {
             double costPerMinute = 1.0;
             if (request.isRoaming()) {
@@ -30,6 +31,8 @@ public class Alpha1Processor implements ServiceAProcessor {
             } else {
                 account.setBucket1(account.getBucket1() + (long) (callCost * 100));
             }
+        } else {
+            throw new RequestNotEligibleException("Request is not eligible for Alpha2 tariff.");
         }
     }
 

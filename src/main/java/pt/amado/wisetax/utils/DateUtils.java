@@ -15,7 +15,7 @@ public final class DateUtils {
         return dayOfWeek >= 1 && dayOfWeek <= 5; // Weekdays are Monday to Friday
     }
 
-    public static boolean isNighttime(Instant requestInstant) {
+    public static boolean isNightTime(Instant requestInstant) {
         ZoneId zoneId = ZoneId.systemDefault();
         ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(requestInstant, zoneId);
         int hour = zonedDateTime.getHour();

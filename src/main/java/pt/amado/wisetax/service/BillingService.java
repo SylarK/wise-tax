@@ -2,10 +2,10 @@ package pt.amado.wisetax.service;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import pt.amado.wisetax.interfaces.ServiceAProcessor;
+import pt.amado.wisetax.exception.RequestNotEligibleException;
+import pt.amado.wisetax.interfaces.ServiceProcessor;
 import pt.amado.wisetax.model.enitities.BillingAccount;
 import pt.amado.wisetax.model.enitities.ChargingRequest;
 import pt.amado.wisetax.model.enums.Tariff;
@@ -23,24 +23,24 @@ public class BillingService {
 
     private final BillingAccountRepository billingAccountRepository;
     private final EligibilityService eligibilityService;
-    private final List<ServiceAProcessor> serviceAProcessors;
-    private Map<Tariff, ServiceAProcessor> tariffProcessorMap;
+    private final List<ServiceProcessor> serviceProcessors;
+    private Map<Tariff, ServiceProcessor> tariffProcessorMap;
 
     @PostConstruct
     public void initializeProcessorMap() {
         tariffProcessorMap = new HashMap<>();
-        for (ServiceAProcessor processor : serviceAProcessors) {
+        for (ServiceProcessor processor : serviceProcessors) {
             tariffProcessorMap.put(processor.getSupportedTariff(), processor);
         }
     }
 
-    public BillingAccount processServiceARequest(BillingAccount account, ChargingRequest request) {
+    public BillingAccount processServiceARequest(BillingAccount account, ChargingRequest request) throws RequestNotEligibleException {
 
         Tariff tariff = retrieveTariffBasedOnRequest(request, account);
         if(Objects.isNull(tariff))
             throw new IllegalArgumentException("Was not possible to find a tariff based on the given parameters");
 
-        ServiceAProcessor processor = tariffProcessorMap.get(tariff);
+        ServiceProcessor processor = tariffProcessorMap.get(tariff);
         if(Objects.isNull(processor))
             throw new IllegalArgumentException("No processor found for the selected tariff.");
 

@@ -6,6 +6,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pt.amado.wisetax.exception.GlobalException;
 import pt.amado.wisetax.model.ExceptionMessage;
 
 @ControllerAdvice
@@ -28,6 +29,17 @@ public class ExceptionHandlingController {
         ExceptionMessage exceptionDTO = ExceptionMessage.builder()
                 .code(status.value())
                 .generalMessage("An error occurred while validation of provided input.")
+                .specificMessage(ex.getMessage()).build();
+
+        return ResponseEntity.status(status).body(exceptionDTO);
+    }
+
+    @ExceptionHandler(GlobalException.class)
+    public ResponseEntity<ExceptionMessage> handleGlobalCustomException(GlobalException ex) {
+        HttpStatus status = HttpStatus.valueOf(ex.getStatusCode());
+        ExceptionMessage exceptionDTO = ExceptionMessage.builder()
+                .code(status.value())
+                .generalMessage("Something went wrong during the processing flow.")
                 .specificMessage(ex.getMessage()).build();
 
         return ResponseEntity.status(status).body(exceptionDTO);

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pt.amado.wisetax.dto.ChargingRequestDTO;
+import pt.amado.wisetax.exception.RequestNotEligibleException;
 import pt.amado.wisetax.model.enitities.BillingAccount;
 import pt.amado.wisetax.model.enitities.ChargingRequest;
 import pt.amado.wisetax.repository.ChargingRequestRepository;
@@ -18,7 +19,7 @@ public class RequestService {
     private final BillingService billingService;
     private final ObjectMapper mapper;
 
-    public BillingAccount processRequest(ChargingRequestDTO chargingRequestDTO){
+    public BillingAccount processRequest(ChargingRequestDTO chargingRequestDTO) throws RequestNotEligibleException {
 
         ChargingRequest request = chargingRequestRepository.save(mapper.convertValue(chargingRequestDTO, ChargingRequest.class));
         BillingAccount billingAccount = retrieveBillingAccount(request);
