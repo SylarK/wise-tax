@@ -5,20 +5,21 @@ import org.springframework.stereotype.Service;
 import pt.amado.wisetax.model.enitities.BillingAccount;
 import pt.amado.wisetax.model.enitities.ChargingRequest;
 import pt.amado.wisetax.model.enums.RequestedService;
+import pt.amado.wisetax.model.enums.Tariff;
 import pt.amado.wisetax.utils.DateUtils;
 
 @Service
 public class EligibilityService {
 
 
-    public void checkElegibilityOfServiceA(ChargingRequest request, BillingAccount account) {
+    public Tariff checkEligibilityOfServiceA(ChargingRequest request, BillingAccount account) {
         if (request.getRequestedService() == RequestedService.A) {
             if (isAlpha1Eligible(request, account)) {
-                return TarifarioServicoA.ALPHA_1;
+                return Tariff.ALPHA_1;
             } else if (isAlpha2Eligible(request, account)) {
-                return TarifarioServicoA.ALPHA_2;
+                return Tariff.ALPHA_2;
             } else if (isAlpha3Eligible(request, account)) {
-                return TarifarioServicoA.ALPHA_3;
+                return Tariff.ALPHA_3;
             }
         }
     }

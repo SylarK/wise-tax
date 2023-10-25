@@ -16,7 +16,7 @@ public class BillingService {
     public BillingAccount processServiceARequest(BillingAccount account, ChargingRequest request) {
         try {
             switch (request.getRequestedService()) {
-                case A -> eligibilityService.checkElegibilityOfServiceA(request, account);
+                case A -> eligibilityService.checkEligibilityOfServiceA(request, account);
                 case B -> eligibilityService.checkElegibilityOfServiceB(request, account);
                 default -> new IllegalArgumentException("The provided service is not available");
             }
