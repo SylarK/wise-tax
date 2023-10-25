@@ -23,26 +23,21 @@ public class Beta3Processor implements ServiceProcessor {
 
     @Override
     public void processRequest(BillingAccount account, ChargingRequest request) throws RequestNotEligibleException {
+        double cost = (isWeekend(request.getCreatedAt())) ? COST_WEEKEND_LOCAL : COST_LOCAL;
 
-        if (request.isRoaming() && account.getBucket2() >= DISCOUNT_MIN_BALANCE_BUCKET_C) {
-            double cost = (isWeekend(request.getCreatedAt())) ? COST_WEEKEND_LOCAL : COST_LOCAL;
-
-            if (account.getBucket3() > DISCOUNT_MIN_BALANCE_BUCKET_C) {
-                cost -= DISCOUNT_AMOUNT_BUCKET_C;
-            }
-
-            if (account.getCounterC() > DISCOUNT_MIN_BALANCE_COUNTER_C) {
-                cost -= DISCOUNT_AMOUNT_COUNTER_C;
-            }
-
-            if (isWeekend(request.getCreatedAt()) && account.getBucket3() > DISCOUNT_MIN_BALANCE_BUCKET_C_WEEKEND) {
-                cost -= DISCOUNT_AMOUNT_BUCKET_C_WEEKEND;
-            }
-
-            account.setBucket3(account.getBucket3() + (long) (cost * 100));
-        } else {
-            throw new RequestNotEligibleException("Request is not eligible for Beta2 tariff.");
+        if (account.getBucket3() > DISCOUNT_MIN_BALANCE_BUCKET_C) {
+            cost -= DISCOUNT_AMOUNT_BUCKET_C;
         }
+
+        if (account.getCounterC() > DISCOUNT_MIN_BALANCE_COUNTER_C) {
+            cost -= DISCOUNT_AMOUNT_COUNTER_C;
+        }
+
+        if (isWeekend(request.getCreatedAt()) && account.getBucket3() > DISCOUNT_MIN_BALANCE_BUCKET_C_WEEKEND) {
+            cost -= DISCOUNT_AMOUNT_BUCKET_C_WEEKEND;
+        }
+
+        account.setBucket3(account.getBucket3() + (long) (cost * 100));
     }
 
     @Override

@@ -4,6 +4,7 @@ import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import pt.amado.wisetax.exception.GlobalException;
 import pt.amado.wisetax.exception.RequestNotEligibleException;
 import pt.amado.wisetax.interfaces.ServiceProcessor;
 import pt.amado.wisetax.model.enitities.BillingAccount;
@@ -65,15 +66,15 @@ public class BillingService {
         return billingAccountRepository.save(account);
     }
 
-    private Tariff retrieveTariffBasedOnRequest(ChargingRequest request, BillingAccount account) {
+    private Tariff retrieveTariffBasedOnRequest(ChargingRequest request, BillingAccount account) throws RequestNotEligibleException {
         try {
             return switch (request.getService()) {
                 case A -> eligibilityService.checkEligibilityOfServiceA(request, account);
-                case B -> eligibilityService.checkElegibilityOfServiceB(request, account);
+                case B -> eligibilityService.checkEligibilityOfServiceB(request, account);
             };
-        }catch (Exception e){
+        } catch (GlobalException e){
             log.error("Something went wrong trying to retrieve the correct tariff based on the eligibility", e);
-            throw new RuntimeException();
+            throw e;
         }
     }
 

@@ -20,4 +20,8 @@ public enum Tariff {
     public static boolean isServiceA(Tariff tariff) {
         return ALPHA_1.equals(tariff) || ALPHA_2.equals(tariff) || ALPHA_3.equals(tariff);
     }
+
+    public static boolean isServiceB(Tariff tariff) {
+        return BETA_1.equals(tariff) || BETA_2.equals(tariff) || BETA_3.equals(tariff);
+    }
 }
