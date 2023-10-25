@@ -1,4 +1,4 @@
-package pt.amado.wisetax.model.enitities;
+package pt.amado.wisetax.model.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;

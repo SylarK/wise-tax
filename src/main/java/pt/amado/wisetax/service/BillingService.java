@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import pt.amado.wisetax.exception.GlobalException;
 import pt.amado.wisetax.exception.RequestNotEligibleException;
 import pt.amado.wisetax.interfaces.ServiceProcessor;
-import pt.amado.wisetax.model.enitities.BillingAccount;
-import pt.amado.wisetax.model.enitities.ChargingRequest;
-import pt.amado.wisetax.model.enums.Tariff;
+import pt.amado.wisetax.model.entities.BillingAccount;
+import pt.amado.wisetax.model.entities.ChargingRequest;
+import pt.amado.wisetax.model.entities.Tariff;
 import pt.amado.wisetax.repository.BillingAccountRepository;
 
 import java.util.HashMap;

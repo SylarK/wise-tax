@@ -1,11 +1,10 @@
 package pt.amado.wisetax.interfaces.impl;
 
 import org.springframework.stereotype.Component;
-import pt.amado.wisetax.exception.RequestNotEligibleException;
 import pt.amado.wisetax.interfaces.ServiceProcessor;
-import pt.amado.wisetax.model.enitities.BillingAccount;
-import pt.amado.wisetax.model.enitities.ChargingRequest;
-import pt.amado.wisetax.model.enums.Tariff;
+import pt.amado.wisetax.model.entities.BillingAccount;
+import pt.amado.wisetax.model.entities.ChargingRequest;
+import pt.amado.wisetax.model.entities.Tariff;
 
 import static pt.amado.wisetax.utils.DateUtils.isNightTime;
 

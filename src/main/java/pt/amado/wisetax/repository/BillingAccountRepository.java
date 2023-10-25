@@ -2,8 +2,7 @@ package pt.amado.wisetax.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pt.amado.wisetax.model.enitities.BillingAccount;
-import pt.amado.wisetax.model.enitities.ChargingRequest;
+import pt.amado.wisetax.model.entities.BillingAccount;
 
 import java.util.UUID;
 

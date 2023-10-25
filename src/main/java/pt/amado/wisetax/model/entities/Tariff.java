@@ -1,4 +1,4 @@
-package pt.amado.wisetax.model.enums;
+package pt.amado.wisetax.model.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

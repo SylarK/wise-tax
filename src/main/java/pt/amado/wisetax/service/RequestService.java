@@ -5,8 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pt.amado.wisetax.dto.ChargingRequestDTO;
 import pt.amado.wisetax.exception.RequestNotEligibleException;
-import pt.amado.wisetax.model.enitities.BillingAccount;
-import pt.amado.wisetax.model.enitities.ChargingRequest;
+import pt.amado.wisetax.model.entities.BillingAccount;
+import pt.amado.wisetax.model.entities.ChargingRequest;
 import pt.amado.wisetax.repository.ChargingRequestRepository;
 
 import java.util.Objects;
