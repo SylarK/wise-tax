@@ -5,8 +5,12 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SourceType;
+import pt.amado.wisetax.model.Buckets;
+import pt.amado.wisetax.model.Counters;
+import pt.amado.wisetax.model.enums.Tariff;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -18,12 +22,22 @@ public class ClientDataRecord {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @CreationTimestamp(source = SourceType.DB)
+    @CreationTimestamp
+    @Column(name = "created_at")
     private Instant createdAt;
 
     @Column(nullable = false)
     private String phoneNumber;
 
+    @Column(nullable = false)
+    private Tariff tariff;
 
+    @OneToOne(mappedBy = "clientDataRecord")
+    private ChargingRequest chargingRequest;
 
+    @Column(nullable = false)
+    private Buckets buckets;
+
+    @Column(nullable = false)
+    private Counters buckets;
 }
