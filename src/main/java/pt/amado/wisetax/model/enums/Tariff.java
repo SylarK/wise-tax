@@ -17,4 +17,7 @@ public enum Tariff {
 
     private final String value;
 
+    public static boolean isServiceA(Tariff tariff) {
+        return ALPHA_1.equals(tariff) || ALPHA_2.equals(tariff) || ALPHA_3.equals(tariff);
+    }
 }

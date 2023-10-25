@@ -51,7 +51,14 @@ public class BillingService {
     }
 
     private void updateCounters(BillingAccount account, ChargingRequest request, Tariff tariff) {
+        if(Tariff.isServiceA(tariff))
+            account.setCounterA(account.getCounterA() + request.getRsu());
 
+        if(Tariff.BETA_1.equals(tariff))
+            account.setCounterB(account.getCounterB() + request.getRsu());
+
+        if(request.isRoaming())
+            account.setCounterC(account.getCounterC() + request.getRsu());
     }
 
     private BillingAccount updateBillingAccount(BillingAccount account) {

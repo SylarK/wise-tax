@@ -25,7 +25,7 @@ public class Alpha3Processor implements ServiceAProcessor {
                 costPerMinute -= 0.05;
             }
             double callCost = costPerMinute * request.getRsu();
-            account.setBucket3(account.getBucket3() - (long) (callCost * 100));
+            account.setBucket3(account.getBucket3() + (long) (callCost * 100));
         }
     }
 

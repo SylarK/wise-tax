@@ -26,9 +26,9 @@ public class Alpha1Processor implements ServiceAProcessor {
                 account.setBucket2(account.getBucket2() - 5);
             }
             if (request.isRoaming()) {
-                account.setBucket3(account.getBucket3() - (long) (callCost * 100));
+                account.setBucket3(account.getBucket3() + (long) (callCost * 100));
             } else {
-                account.setBucket1(account.getBucket1() - (long) (callCost * 100));
+                account.setBucket1(account.getBucket1() + (long) (callCost * 100));
             }
         }
     }
