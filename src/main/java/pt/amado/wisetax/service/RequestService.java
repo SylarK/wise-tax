@@ -23,7 +23,7 @@ public class RequestService {
 
         ChargingRequest request = chargingRequestRepository.save(mapper.convertValue(chargingRequestDTO, ChargingRequest.class));
         BillingAccount billingAccount = retrieveBillingAccount(request);
-        billingService.processServiceARequest(billingAccount, null);
+        billingService.processServiceARequest(billingAccount, request);
 
         return null;
     }

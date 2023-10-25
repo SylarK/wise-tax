@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SourceType;
-import pt.amado.wisetax.model.enums.Service;
+import pt.amado.wisetax.model.enums.RequestedService;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -26,7 +26,7 @@ public class ChargingRequest {
     private Instant createdAt;
 
     @Column(nullable = false)
-    private Service service;
+    private RequestedService RequestedService;
 
     @Column(nullable = false)
     private long rsu;

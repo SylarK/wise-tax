@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum Service {
+public enum RequestedService {
     A("A"),
     B("B");
 
