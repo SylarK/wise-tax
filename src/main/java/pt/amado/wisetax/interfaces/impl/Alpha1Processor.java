@@ -3,6 +3,7 @@ package pt.amado.wisetax.interfaces.impl;
 import pt.amado.wisetax.interfaces.ServiceAProcessor;
 import pt.amado.wisetax.model.enitities.BillingAccount;
 import pt.amado.wisetax.model.enitities.ChargingRequest;
+import pt.amado.wisetax.model.enums.Tariff;
 
 import static pt.amado.wisetax.utils.DateUtils.isWeekday;
 
@@ -28,6 +29,11 @@ public class Alpha1Processor implements ServiceAProcessor {
                 account.setBucket1(account.getBucket1() - (long) (callCost * 100));
             }
         }
+    }
+
+    @Override
+    public Tariff getSupportedTariff() {
+        return Tariff.ALPHA_1;
     }
 
 }

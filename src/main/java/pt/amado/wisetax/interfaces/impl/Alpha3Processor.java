@@ -3,6 +3,7 @@ package pt.amado.wisetax.interfaces.impl;
 import pt.amado.wisetax.interfaces.ServiceAProcessor;
 import pt.amado.wisetax.model.enitities.BillingAccount;
 import pt.amado.wisetax.model.enitities.ChargingRequest;
+import pt.amado.wisetax.model.enums.Tariff;
 
 import static pt.amado.wisetax.utils.DateUtils.isWeekend;
 
@@ -24,6 +25,11 @@ public class Alpha3Processor implements ServiceAProcessor {
             double callCost = costPerMinute * request.getRsu();
             account.setBucket3(account.getBucket3() - (long) (callCost * 100));
         }
+    }
+
+    @Override
+    public Tariff getSupportedTariff() {
+        return Tariff.ALPHA_3;
     }
 
 }

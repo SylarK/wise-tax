@@ -22,6 +22,7 @@ public class EligibilityService {
                 return Tariff.ALPHA_3;
             }
         }
+        return null;
     }
 
     public void checkElegibilityOfServiceB(ChargingRequest request, BillingAccount account) {
