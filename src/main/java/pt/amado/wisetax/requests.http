@@ -6,7 +6,7 @@ Content-Type: application/json
   "service": "A",
   "roaming": true,
   "phoneNumber": "+1234567890",
-  "rsu": 100
+  "rsu": 2
 }
 
 ### Find All Requests

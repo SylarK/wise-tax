@@ -1,5 +1,6 @@
 package pt.amado.wisetax.interfaces.impl;
 
+import org.springframework.stereotype.Component;
 import pt.amado.wisetax.interfaces.ServiceAProcessor;
 import pt.amado.wisetax.model.enitities.BillingAccount;
 import pt.amado.wisetax.model.enitities.ChargingRequest;
@@ -7,6 +8,7 @@ import pt.amado.wisetax.model.enums.Tariff;
 
 import static pt.amado.wisetax.utils.DateUtils.isNighttime;
 
+@Component
 public class Alpha2Processor implements ServiceAProcessor {
 
     @Override

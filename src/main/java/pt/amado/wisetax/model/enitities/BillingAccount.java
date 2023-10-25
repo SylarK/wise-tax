@@ -35,7 +35,4 @@ public class BillingAccount {
 
     @UpdateTimestamp(source = SourceType.DB)
     private Instant lastRequestUpdate;
-
-    //TODO: implement the "tarifário"
-
 }

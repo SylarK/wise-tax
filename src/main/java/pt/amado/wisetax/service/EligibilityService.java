@@ -13,7 +13,7 @@ public class EligibilityService {
 
 
     public Tariff checkEligibilityOfServiceA(ChargingRequest request, BillingAccount account) {
-        if (request.getRequestedService() == RequestedService.A) {
+        if (request.getService() == RequestedService.A) {
             if (isAlpha1Eligible(request, account)) {
                 return Tariff.ALPHA_1;
             } else if (isAlpha2Eligible(request, account)) {
@@ -25,7 +25,8 @@ public class EligibilityService {
         return null;
     }
 
-    public void checkElegibilityOfServiceB(ChargingRequest request, BillingAccount account) {
+    public Tariff checkElegibilityOfServiceB(ChargingRequest request, BillingAccount account) {
+        return null;
     }
 
     private boolean isAlpha1Eligible(ChargingRequest request, BillingAccount account) {

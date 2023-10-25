@@ -1,5 +1,6 @@
 package pt.amado.wisetax.model.enitities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,7 @@ import java.util.UUID;
 public class ChargingRequest {
 
     @Id
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
@@ -26,7 +28,7 @@ public class ChargingRequest {
     private Instant createdAt;
 
     @Column(nullable = false)
-    private RequestedService RequestedService;
+    private RequestedService service;
 
     @Column(nullable = false)
     private long rsu;
