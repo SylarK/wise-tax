@@ -5,8 +5,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pt.amado.wisetax.dto.ChargingRequestDTO;
 import pt.amado.wisetax.exception.RequestNotEligibleException;
+import pt.amado.wisetax.model.ChargingResult;
 import pt.amado.wisetax.model.entities.BillingAccount;
+import pt.amado.wisetax.model.entities.ChargingReply;
 import pt.amado.wisetax.model.entities.ChargingRequest;
+import pt.amado.wisetax.model.enums.Status;
 import pt.amado.wisetax.repository.ChargingRequestRepository;
 
 import java.util.Objects;
@@ -19,12 +22,13 @@ public class RequestService {
     private final BillingService billingService;
     private final ObjectMapper mapper;
 
-    public BillingAccount processRequest(ChargingRequestDTO chargingRequestDTO) throws RequestNotEligibleException {
+    public ChargingReply processRequest(ChargingRequestDTO chargingRequestDTO) throws RequestNotEligibleException {
 
         ChargingRequest request = chargingRequestRepository.save(mapper.convertValue(chargingRequestDTO, ChargingRequest.class));
         BillingAccount billingAccount = retrieveBillingAccount(request);
-        return billingService.processServiceARequest(billingAccount, request);
-
+        billingService.processServiceARequest(billingAccount, request);
+        ChargingResult result = new ChargingResult(Status.OK, Status.OK.getDescription());
+        return new ChargingReply();
     }
 
     private BillingAccount retrieveBillingAccount(ChargingRequest request) {

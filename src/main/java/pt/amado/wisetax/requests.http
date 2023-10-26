@@ -3,8 +3,8 @@ POST localhost:8080/api/v1/request
 Content-Type: application/json
 
 {
-  "service": "B",
-  "roaming": true,
+  "service": "A",
+  "roaming": false,
   "phoneNumber": "+1234567890",
   "rsu": 2
 }

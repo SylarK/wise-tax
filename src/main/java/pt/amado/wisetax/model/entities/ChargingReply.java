@@ -1,20 +1,18 @@
 package pt.amado.wisetax.model.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pt.amado.wisetax.model.ChargingResult;
 
 import java.util.UUID;
 
-@Entity
-@Setter
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ChargingReply {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
 
     @Embedded
     private ChargingResult chargingResult;

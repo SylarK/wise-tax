@@ -2,8 +2,6 @@ package pt.amado.wisetax.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pt.amado.wisetax.model.Buckets;
-import pt.amado.wisetax.model.Counters;
 import pt.amado.wisetax.model.entities.BillingAccount;
 import pt.amado.wisetax.model.entities.ChargingRequest;
 import pt.amado.wisetax.model.entities.mdb.ClientDataRecord;
@@ -25,8 +23,12 @@ public class ClientDataRecordService {
 
     private ClientDataRecord generateClientDataRecord(BillingAccount account, ChargingRequest request, Tariff tariff) {
         return ClientDataRecord.builder()
-                .buckets(new Buckets(account))
-                .counters(new Counters(account))
+                .bucket1(account.getBucket1())
+                .bucket2(account.getBucket2())
+                .bucket3(account.getBucket3())
+                .counterA(account.getCounterA())
+                .counterB(account.getCounterB())
+                .counterC(account.getCounterC())
                 .createdAt(request.getCreatedAt())
                 .phoneNumber(account.getPhoneNumber())
                 .tariff(tariff)
