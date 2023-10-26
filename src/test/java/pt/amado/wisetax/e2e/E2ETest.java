@@ -1,4 +1,4 @@
-package pt.amado.wisetax;
+package pt.amado.wisetax.e2e;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
