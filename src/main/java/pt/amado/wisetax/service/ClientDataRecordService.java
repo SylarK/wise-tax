@@ -2,6 +2,7 @@ package pt.amado.wisetax.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pt.amado.wisetax.exception.UserNotFoundException;
 import pt.amado.wisetax.model.entities.BillingAccount;
 import pt.amado.wisetax.model.entities.ChargingRequest;
 import pt.amado.wisetax.model.entities.mdb.ClientDataRecord;
@@ -58,11 +59,15 @@ public class ClientDataRecordService {
      * @param order The order in which to retrieve the records (ASC for ascending, DESC for descending).
      * @return A list of ClientDataRecord entries matching the phone number, sorted as specified.
      */
-    public List<ClientDataRecord> findAllRecordsByPhoneNumber(String phoneNumber, String order) {
+    public List<ClientDataRecord> findAllRecordsByPhoneNumber(String phoneNumber, String order) throws UserNotFoundException {
         if(phoneNumber.charAt(0) == ' ')
             phoneNumber = phoneNumber.replaceFirst(" ", "+");
-        if ("ASC".equalsIgnoreCase(order))
-            return clientDataRecordRepository.findByPhoneNumberOrderByCreatedAtAsc(phoneNumber);
-        return clientDataRecordRepository.findByPhoneNumberOrderByCreatedAtDesc(phoneNumber);
+
+        List<ClientDataRecord> result;
+        result = "ASC".equalsIgnoreCase(order) ? clientDataRecordRepository.findByPhoneNumberOrderByCreatedAtAsc(phoneNumber) : clientDataRecordRepository.findByPhoneNumberOrderByCreatedAtDesc(phoneNumber);
+
+        if(result.isEmpty())
+            throw new UserNotFoundException("There is no user linked to the following phone number : " + phoneNumber);
+        return result;
     }
 }

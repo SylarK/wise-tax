@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pt.amado.wisetax.exception.GlobalException;
 import pt.amado.wisetax.exception.RequestNotEligibleException;
+import pt.amado.wisetax.exception.UserNotFoundException;
 import pt.amado.wisetax.model.ChargingReply;
 import pt.amado.wisetax.model.ChargingResult;
 import pt.amado.wisetax.model.ExceptionMessage;
@@ -51,6 +52,18 @@ public class ExceptionHandlingController {
 
         log.error(Arrays.toString(ex.getStackTrace()), ex.getCause());
         return ResponseEntity.status(status).body(new ChargingReply(result, 0));
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ExceptionMessage> handleUserNotFoundCustomException(UserNotFoundException ex) {
+        HttpStatus status = HttpStatus.valueOf(ex.getStatusCode());
+        ExceptionMessage exceptionDTO = ExceptionMessage.builder()
+                .code(status.value())
+                .generalMessage("Was not possible to fetch any data because the provided user does not exists in our database.")
+                .specificMessage(ex.getMessage()).build();
+
+        log.error(Arrays.toString(ex.getStackTrace()), ex.getCause());
+        return ResponseEntity.status(status).body(exceptionDTO);
     }
 
     @ExceptionHandler(GlobalException.class)

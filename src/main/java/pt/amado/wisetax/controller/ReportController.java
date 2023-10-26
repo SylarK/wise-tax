@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import pt.amado.wisetax.exception.GlobalException;
 import pt.amado.wisetax.model.entities.mdb.ClientDataRecord;
 import pt.amado.wisetax.service.ClientDataRecordService;
 
@@ -20,7 +21,7 @@ public class ReportController {
 
     @GetMapping
     public ResponseEntity<List<ClientDataRecord>> findAllRecordsByPhoneNumber(@RequestParam String phoneNumber,
-                                                                              @RequestParam(required = false, defaultValue = "DESC") String order) {
+                                                                              @RequestParam(required = false, defaultValue = "DESC") String order) throws GlobalException {
         return ResponseEntity.ok(clientDataRecordService.findAllRecordsByPhoneNumber(phoneNumber, order));
     }
 
