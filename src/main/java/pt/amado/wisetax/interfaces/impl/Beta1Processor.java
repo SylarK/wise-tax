@@ -30,11 +30,11 @@ public class Beta1Processor implements ServiceProcessor {
         }
 
         if (request.isRoaming() && account.getBucket2() >= MIN_BALANCE_COUNTER_B) {
-            account.setBucket2(account.getBucket2() + (long) (cost * 100));
+            account.setBucket2(account.getBucket2() + (long) cost);
         } else if (request.isRoaming()) {
-            account.setBucket3(account.getBucket3() + (long) (cost * 100));
+            account.setBucket3(account.getBucket3() + (long) cost);
         } else {
-            account.setBucket1(account.getBucket1() + (long) (cost * 100));
+            account.setBucket1(account.getBucket1() + (long) cost);
         }
     }
 

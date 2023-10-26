@@ -30,7 +30,7 @@ public class Beta2Processor implements ServiceProcessor {
             cost -= DISCOUNT_AMOUNT_COUNTER_B;
         }
 
-        account.setBucket2(account.getBucket2() + (long) (cost * 100));
+        account.setBucket2(account.getBucket2() + (long) cost);
     }
 
     @Override

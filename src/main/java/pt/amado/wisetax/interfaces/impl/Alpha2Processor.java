@@ -25,7 +25,7 @@ public class Alpha2Processor implements ServiceProcessor {
         }
 
         double callCost = costPerMinute * request.getRsu();
-        account.setBucket3(account.getBucket3() + (long) (callCost * 100));
+        account.setBucket3(account.getBucket3() + (long) callCost);
     }
 
     @Override

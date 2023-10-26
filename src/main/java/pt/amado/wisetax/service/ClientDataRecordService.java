@@ -10,13 +10,14 @@ import pt.amado.wisetax.model.entities.mdb.ClientDataRecord;
 import pt.amado.wisetax.model.enums.Tariff;
 import pt.amado.wisetax.repository.mdb.ClientDataRecordRepository;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
 public class ClientDataRecordService {
 
-    ClientDataRecordRepository clientDataRecordRepository;
+    private final ClientDataRecordRepository clientDataRecordRepository;
 
     void saveTransaction(BillingAccount account, ChargingRequest request, Tariff tariff) {
         clientDataRecordRepository.save(Objects.requireNonNull(generateClientDataRecord(account, request, tariff)));
@@ -33,4 +34,9 @@ public class ClientDataRecordService {
                 .build();
     }
 
+    public List<ClientDataRecord> findAllRecordsByPhoneNumber(String phoneNumber, String order) {
+        if ("ASC".equalsIgnoreCase(order))
+            return clientDataRecordRepository.findByPhoneNumberOrderByCreatedAtAsc(phoneNumber);
+        return clientDataRecordRepository.findByPhoneNumberOrderByCreatedAtDesc(phoneNumber);
+    }
 }

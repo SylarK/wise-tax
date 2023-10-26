@@ -37,7 +37,7 @@ public class Beta3Processor implements ServiceProcessor {
             cost -= DISCOUNT_AMOUNT_BUCKET_C_WEEKEND;
         }
 
-        account.setBucket3(account.getBucket3() + (long) (cost * 100));
+        account.setBucket3(account.getBucket3() + (long) cost);
     }
 
     @Override

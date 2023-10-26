@@ -13,7 +13,7 @@ import pt.amado.wisetax.model.entities.BillingAccount;
 import pt.amado.wisetax.service.RequestService;
 
 @Controller
-@RequestMapping("api/v1")
+@RequestMapping("api/v1/request")
 @RequiredArgsConstructor
 public class RequestController {
 
