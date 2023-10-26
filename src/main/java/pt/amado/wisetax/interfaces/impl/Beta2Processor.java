@@ -14,15 +14,15 @@ public class Beta2Processor implements ServiceProcessor {
     private static final double COST_LOCAL = 0.05;
     private static final double COST_NIGHT_LOCAL = 0.025;
     private static final double DISCOUNT_MIN_BALANCE_BUCKET_B = 15;
-    private static final double DISCOUNT_AMOUNT = 0.02;
+    private static final double DISCOUNT_AMOUNT = 0.005;
     private static final double DISCOUNT_MIN_BALANCE_COUNTER_B = 10;
-    private static final double DISCOUNT_AMOUNT_COUNTER_B = 0.005;
+    private static final double DISCOUNT_AMOUNT_COUNTER_B = 0.02;
 
     @Override
     public void processRequest(BillingAccount account, ChargingRequest request) {
         double cost = (isNightTime(request.getCreatedAt())) ? COST_NIGHT_LOCAL : COST_LOCAL;
 
-        if (account.getBucket2() > DISCOUNT_MIN_BALANCE_BUCKET_B) {
+        if ((double) account.getBucket2() / 100 > DISCOUNT_MIN_BALANCE_BUCKET_B) {
             cost -= DISCOUNT_AMOUNT;
         }
 
@@ -30,7 +30,8 @@ public class Beta2Processor implements ServiceProcessor {
             cost -= DISCOUNT_AMOUNT_COUNTER_B;
         }
 
-        account.setBucket2(account.getBucket2() + (long) cost);
+        double callCost = cost * request.getRsu();
+        account.setBucket2(account.getBucket2() + (long) (callCost * 100));
     }
 
     @Override

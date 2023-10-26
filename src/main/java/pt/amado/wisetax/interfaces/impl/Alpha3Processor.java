@@ -26,12 +26,12 @@ public class Alpha3Processor implements ServiceProcessor {
             costPerMinute -= DISCOUNT_COUNTER_C;
         }
 
-        if (account.getBucket3() >= DISCOUNT_MIN_BALANCE_BUCKET_3) {
+        if ((double) account.getBucket3() / 100 > DISCOUNT_MIN_BALANCE_BUCKET_3) {
             costPerMinute -= DISCOUNT_BUCKET_3;
         }
 
         double callCost = costPerMinute * request.getRsu();
-        account.setBucket3(account.getBucket3() + (long) callCost);
+        account.setBucket3(account.getBucket3() + (long) (callCost * 100));
     }
 
     @Override

@@ -35,6 +35,8 @@ public class ClientDataRecordService {
     }
 
     public List<ClientDataRecord> findAllRecordsByPhoneNumber(String phoneNumber, String order) {
+        if(phoneNumber.charAt(0) == ' ')
+            phoneNumber = phoneNumber.replaceFirst(" ", "+");
         if ("ASC".equalsIgnoreCase(order))
             return clientDataRecordRepository.findByPhoneNumberOrderByCreatedAtAsc(phoneNumber);
         return clientDataRecordRepository.findByPhoneNumberOrderByCreatedAtDesc(phoneNumber);

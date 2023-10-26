@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReportController {
 
-    ClientDataRecordService clientDataRecordService;
+    private final ClientDataRecordService clientDataRecordService;
 
     @GetMapping
     public ResponseEntity<List<ClientDataRecord>> findAllRecordsByPhoneNumber(@RequestParam String phoneNumber,

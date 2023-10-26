@@ -21,20 +21,21 @@ public class Beta1Processor implements ServiceProcessor {
     public void processRequest(BillingAccount account, ChargingRequest request) {
         double cost = (request.isRoaming()) ? COST_ROAMING : COST_LOCAL;
 
-        if (account.getCounterB() > MAX_CALLS) {
+        if (account.getCounterA() > MAX_CALLS) {
             cost -= BONUS;
         }
 
-        if (account.getBucket3() >= DISCOUNT_MIN_BALANCE) {
+        if ((double) account.getBucket3() / 100 >= DISCOUNT_MIN_BALANCE) {
             cost -= DISCOUNT_AMOUNT;
         }
 
-        if (request.isRoaming() && account.getBucket2() >= MIN_BALANCE_COUNTER_B) {
-            account.setBucket2(account.getBucket2() + (long) cost);
+        double callCost = cost * request.getRsu();
+        if (request.isRoaming() && (double) account.getBucket2() / 100 >= MIN_BALANCE_COUNTER_B) {
+            account.setBucket2(account.getBucket2() + (long) (callCost * 100));
         } else if (request.isRoaming()) {
-            account.setBucket3(account.getBucket3() + (long) cost);
+            account.setBucket3(account.getBucket3() + (long) (callCost * 100));
         } else {
-            account.setBucket1(account.getBucket1() + (long) cost);
+            account.setBucket1(account.getBucket1() + (long) (callCost * 100));
         }
     }
 
