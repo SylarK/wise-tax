@@ -24,4 +24,4 @@ jobs:
         cache: maven
 
     - name: Build and Test with Maven (Unit Tests)
-      run: mvn -B package --file pom.xml -P unit-tests
+      run: mvn -B package --file pom.xml
