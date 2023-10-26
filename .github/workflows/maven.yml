@@ -1,5 +1,5 @@
 # This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# The main goal here will be run all tests in order to ensure the quality of code
+# The main goal here will be run all tests to ensure the quality of code
 
 name: Java CI with Maven
 
