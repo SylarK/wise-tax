@@ -4,6 +4,7 @@ import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.util.StringUtils;
 import pt.amado.wisetax.model.enums.Status;
@@ -11,6 +12,7 @@ import pt.amado.wisetax.model.enums.Status;
 @Embeddable
 @Builder
 @NoArgsConstructor
+@Data
 public class ChargingResult {
 
     @Enumerated(EnumType.STRING)
@@ -21,8 +23,9 @@ public class ChargingResult {
         if(Status.NOT_ELIGIBLE.equals(status)) {
             if(!StringUtils.hasText(reason))
                 throw new IllegalArgumentException("The provided status must to implement a reason description");
-            this.reason = reason;
         }
+        this.reason = reason;
+        this.status = status;
     }
 
 }

@@ -4,9 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pt.amado.wisetax.dto.ChargingRequestDTO;
 import pt.amado.wisetax.exception.GlobalException;
 import pt.amado.wisetax.model.ChargingReply;
@@ -20,9 +18,8 @@ public class RequestController {
     private final RequestService requestService;
 
     @PostMapping
-    ResponseEntity<ChargingReply> processRequest(@RequestBody @Validated ChargingRequestDTO dto) throws GlobalException {
+    @ResponseBody ResponseEntity<ChargingReply> processRequest(@RequestBody @Validated ChargingRequestDTO dto) throws GlobalException {
         return ResponseEntity.ok(requestService.processRequest(dto));
     }
-
 
 }
