@@ -1,6 +1,6 @@
 # Wise-tax
 
-- The wise-tax application is an answer to Altice Labs challenge.
+- The wise-tax application is an response to a challenge received.
 
 ### Context of the challenge
 - Create a web solution to order management and reports taking into account the provided tariffs.
