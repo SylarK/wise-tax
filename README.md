@@ -23,7 +23,7 @@
 
 **Step 1: Clone the Repository**
 ```bash
-git clone https://your-github-repo-url.git
+git clone https://localhost:8080/wisetax-billing-system.git
 cd wisetax-billing-system
 ```
 
