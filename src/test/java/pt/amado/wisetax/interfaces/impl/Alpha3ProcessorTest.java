@@ -13,10 +13,10 @@ import java.time.Instant;
 
 import static org.mockito.Mockito.*;
 
-class Alpha2ProcessorTest {
+class Alpha3ProcessorTest {
 
     @InjectMocks
-    private Alpha2Processor alpha2Processor;
+    private Alpha3Processor alpha3Processor;
 
     @Mock
     private BillingAccount billingAccount;
@@ -27,41 +27,37 @@ class Alpha2ProcessorTest {
     }
 
     @Test
-    @DisplayName("Processing when counterB is greater than 10")
-    public void shouldProcessTakingIntoAccountDiscountBasedOnCounter() {
+    @DisplayName("Processing with counter C greater than discount threshold")
+    public void shouldProcessWithCounterCDiscount() {
         Instant constantInstant = Instant.parse("2023-10-26T00:00:00Z");
 
-        when(billingAccount.getBucket1()).thenReturn(0L);
-        when(billingAccount.getBucket2()).thenReturn(0L);
         when(billingAccount.getBucket3()).thenReturn(0L);
-        when(billingAccount.getCounterB()).thenReturn(15L);
+        when(billingAccount.getCounterC()).thenReturn(15L);
 
         ChargingRequest chargingRequest = new ChargingRequest();
-        chargingRequest.setRoaming(false);
-        chargingRequest.setRsu(1);
         chargingRequest.setCreatedAt(constantInstant);
+        chargingRequest.setRsu(1);
 
-        alpha2Processor.processRequest(billingAccount, chargingRequest);
+        alpha3Processor.processRequest(billingAccount, chargingRequest);
 
-        verify(billingAccount, times(1)).setBucket3(4);
+        verify(billingAccount, times(1)).setBucket3(80);
     }
 
     @Test
-    @DisplayName("Processing when bucket2 is greater than 15 euros")
-    public void shouldProcessTakingIntoAccountDiscountBucket2() {
+    @DisplayName("Processing with balance in bucket3 greater than discount threshold")
+    public void shouldProcessWithBucket3Discount() {
         Instant constantInstant = Instant.parse("2023-10-26T00:00:00Z");
-        when(billingAccount.getBucket1()).thenReturn(0L);
-        when(billingAccount.getBucket2()).thenReturn(0L);
+
         when(billingAccount.getBucket3()).thenReturn(2000L);
-        when(billingAccount.getCounterB()).thenReturn(5L);
+        when(billingAccount.getCounterC()).thenReturn(5L);
 
         ChargingRequest chargingRequest = new ChargingRequest();
-        chargingRequest.setRoaming(false);
-        chargingRequest.setRsu(1);
         chargingRequest.setCreatedAt(constantInstant);
+        chargingRequest.setRsu(1);
 
-        alpha2Processor.processRequest(billingAccount, chargingRequest);
+        alpha3Processor.processRequest(billingAccount, chargingRequest);
 
-        verify(billingAccount, times(1)).setBucket3(2025);
+        verify(billingAccount, times(1)).setBucket3(2095);
     }
+
 }
