@@ -16,10 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.IfProfileValue;
 import org.springframework.test.web.servlet.MockMvc;
 import pt.amado.wisetax.base.TestProvider;
 import pt.amado.wisetax.dto.ChargingRequestDTO;
 
+@IfProfileValue(name = "skipE2ETests", value = "false")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class E2ETest {
@@ -52,7 +54,6 @@ public class E2ETest {
 
     @Test
     @DisplayName("Should return an error when an invalid phoneNumber is provided")
-    @Disabled
     public void shouldFailWhenIsProvidedAnInvalidPhoneArgument() throws Exception {
 
         ObjectMapper mapper = new ObjectMapper();
@@ -70,7 +71,6 @@ public class E2ETest {
 
     @Test
     @DisplayName("Should return an error when an invalid service is provided")
-    @Disabled
     public void shouldFailWhenIsProvidedAnInvalidServiceArgument() throws Exception {
 
         ObjectMapper mapper = new ObjectMapper();

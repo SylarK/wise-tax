@@ -85,5 +85,19 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>unit-tests</id>
+            <properties>
+                <skipE2ETests>true</skipE2ETests>
+            </properties>
+        </profile>
+        <profile>
+            <id>e2e-tests</id>
+            <properties>
+                <skipE2ETests>false</skipE2ETests>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>
