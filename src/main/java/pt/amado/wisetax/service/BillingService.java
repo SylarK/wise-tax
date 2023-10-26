@@ -30,7 +30,7 @@ public class BillingService {
 
     /**
      * There is a brief related to this method in the documentation, the main idea here was creating something reusable and generic enough
-     * to guarantee the maintainability. It is mapping supported tariffs to their corresponding ServiceProcessor instances.
+     * to guarantee the maintainability. It is a mapping of supported tariffs to their corresponding ServiceProcessor instances.
      * This method is typically called during the application startup, populating the map for tariff-based processing.
      */
     @PostConstruct
