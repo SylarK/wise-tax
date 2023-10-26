@@ -20,7 +20,7 @@ public class Beta3Processor implements ServiceProcessor {
     private static final double DISCOUNT_AMOUNT_COUNTER_C = 0.02;
 
     @Override
-    public void processRequest(BillingAccount account, ChargingRequest request) throws RequestNotEligibleException {
+    public void processRequest(BillingAccount account, ChargingRequest request) {
         double cost = (isWeekend(request.getCreatedAt())) ? COST_WEEKEND_LOCAL : COST_LOCAL;
 
         if ((double) account.getBucket3() / 100 > DISCOUNT_MIN_BALANCE_BUCKET_C) {
