@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pt.amado.wisetax.dto.ChargingRequestDTO;
 import pt.amado.wisetax.exception.GlobalException;
-import pt.amado.wisetax.model.entities.BillingAccount;
-import pt.amado.wisetax.model.entities.ChargingReply;
+import pt.amado.wisetax.model.ChargingReply;
 import pt.amado.wisetax.service.RequestService;
 
 @Controller

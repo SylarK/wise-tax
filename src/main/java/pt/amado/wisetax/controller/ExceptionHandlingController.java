@@ -8,7 +8,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pt.amado.wisetax.exception.GlobalException;
+import pt.amado.wisetax.exception.RequestNotEligibleException;
+import pt.amado.wisetax.model.ChargingReply;
+import pt.amado.wisetax.model.ChargingResult;
 import pt.amado.wisetax.model.ExceptionMessage;
+import pt.amado.wisetax.model.enums.Status;
 
 import java.util.Arrays;
 
@@ -38,6 +42,15 @@ public class ExceptionHandlingController {
 
         log.error(Arrays.toString(ex.getStackTrace()), ex.getCause());
         return ResponseEntity.status(status).body(exceptionDTO);
+    }
+
+    @ExceptionHandler(RequestNotEligibleException.class)
+    public ResponseEntity<ChargingReply> handleRequestNotEligibleCustomException(RequestNotEligibleException ex) {
+        ChargingResult result = new ChargingResult(Status.NOT_ELIGIBLE, ex.getMessage());
+        HttpStatus status = HttpStatus.valueOf(ex.getStatusCode());
+
+        log.error(Arrays.toString(ex.getStackTrace()), ex.getCause());
+        return ResponseEntity.status(status).body(new ChargingReply(result, 0));
     }
 
     @ExceptionHandler(GlobalException.class)
